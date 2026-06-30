@@ -8,7 +8,7 @@ OneFiveFour AI Media Platform
 
 Build an AI-native operating system for digital publishing companies.
 
-This platform is not a CMS. It provides AI employees, workflows, tasks, research, writing, translation, SEO, fact-checking, analytics, cost tracking, and integrations for publishing platforms.
+This platform is not a CMS. It provides AI Employees, assignments, research, writing, translation, SEO, fact-checking, analytics, cost tracking, and integrations for publishing platforms.
 
 Razbudise.mk is the first customer, but the platform must stay independent from Razbudise.
 
@@ -29,22 +29,26 @@ A user logs into the platform and sees the initial AI company structure:
 - Organization
 - Departments
 - AI Employees
-- Tasks
-- Activity logs
-- Workflow statuses
+- Assignments
+- Assignment Logs
+- Employee Messages
+- Business Process statuses
+- SOPs
+- Company Policies
+- Mock Brain / Model configuration
 
 No real OpenAI API integration yet.
 
-Use mock AI providers first.
+Use mock Brain / Model providers first.
 
 ## Initial AI Employees
 
-- Elena Markova — Editor-in-Chief AI
-- Martin Nikolovski — Researcher AI
-- Mila Andonova — Macedonian Writer AI
-- Sara Ilieva — Translator / Localization AI
-- Viktor Petrov — SEO AI
-- David Kostovski — Fact Checker AI
+- Elena Markova: Editor-in-Chief AI
+- Martin Nikolovski: Researcher AI
+- Mila Andonova: Macedonian Writer AI
+- Sara Ilieva: Translator / Localization AI
+- Viktor Petrov: SEO AI
+- David Kostovski: Fact Checker AI
 
 ## Initial Departments
 
@@ -68,7 +72,7 @@ Preferred stack:
 - Database: PostgreSQL
 - Queue: Redis
 - Search: Meilisearch later
-- AI Providers: OpenAI later, mock provider first
+- Brain / Model Providers: OpenAI later, mock provider first
 
 ## Important Rule
 
@@ -81,17 +85,19 @@ Create interfaces and mock services first.
 Create the foundation:
 
 - Organizations
-- Sites
 - Departments
 - AI Employees
 - Employee statuses
-- Tasks
-- Task logs
-- Workflows
-- Workflow steps
-- Prompt templates
-- AI provider abstraction
-- Mock AI provider
+- Assignments
+- Assignment Logs
+- Employee Messages
+- Employee Performance Metrics
+- Business Processes
+- Standard Operating Procedures
+- Company Policies
+- Capabilities
+- Brain / Model provider abstraction
+- Mock Brain / Model provider
 - Basic dashboard/admin
 
 ## Documentation First
