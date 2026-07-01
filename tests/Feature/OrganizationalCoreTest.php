@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class OrganizationalCoreTest extends TestCase
@@ -44,6 +45,8 @@ class OrganizationalCoreTest extends TestCase
 
     public function test_organizational_core_classes_exist(): void
     {
+        $this->assertSame('pgsql', DB::connection()->getDriverName());
+
         foreach ($this->models as $modelName => $modelClass) {
             $this->assertTrue(class_exists($modelClass), "{$modelName} model exists.");
             $this->assertTrue(method_exists($modelClass, 'factory'), "{$modelName} factory is available.");

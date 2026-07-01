@@ -70,9 +70,21 @@ composer install
 npm install
 cp .env.example .env
 php artisan key:generate
+docker compose up -d postgres
 php artisan migrate:fresh --seed
 php artisan serve
 ```
+
+The local PostgreSQL service is defined in `docker-compose.yml` and uses these default Laravel database settings:
+
+- `DB_CONNECTION=pgsql`
+- `DB_HOST=127.0.0.1`
+- `DB_PORT=5432`
+- `DB_DATABASE=onefivefour_ai_platform`
+- `DB_USERNAME=postgres`
+- `DB_PASSWORD=postgres`
+
+The Compose setup also initializes `onefivefour_ai_platform_testing` for PHPUnit.
 
 Run tests:
 
