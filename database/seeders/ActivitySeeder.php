@@ -20,7 +20,12 @@ class ActivitySeeder extends Seeder
         $department = Department::query()->where('organization_id', $organization->id)->where('name', 'Editorial')->firstOrFail();
         $employee = Employee::query()->where('organization_id', $organization->id)->where('full_name', 'Elena Markova')->firstOrFail();
         $assignment = Assignment::query()->where('organization_id', $organization->id)->where('title', 'Review first Razbudise editorial package')->firstOrFail();
-        $auditLog = AuditLog::query()->where('organization_id', $organization->id)->where('auditable_id', $assignment->id)->firstOrFail();
+        $auditLog = AuditLog::query()
+            ->where('organization_id', $organization->id)
+            ->where('event_type', 'assignment_created')
+            ->where('auditable_type', Assignment::class)
+            ->where('auditable_id', $assignment->id)
+            ->firstOrFail();
 
         Activity::query()->updateOrCreate(
             [

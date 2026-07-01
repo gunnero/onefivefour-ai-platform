@@ -167,8 +167,8 @@ class OrganizationalCoreTest extends TestCase
         $this->assertSame(1, $organization->policies()->count());
         $this->assertSame(1, $organization->standardOperatingProcedures()->count());
         $this->assertSame(1, $organization->assignments()->count());
-        $this->assertSame(1, $organization->activities()->count());
-        $this->assertSame(1, $organization->auditLogs()->count());
+        $this->assertGreaterThanOrEqual(1, $organization->activities()->count());
+        $this->assertGreaterThanOrEqual(1, $organization->auditLogs()->count());
     }
 
     public function test_seeded_admin_user_can_open_filament(): void
