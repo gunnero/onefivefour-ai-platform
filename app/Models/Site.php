@@ -37,6 +37,26 @@ class Site extends Model
         return $this->hasMany(Assignment::class);
     }
 
+    public function businessProcessRuns(): HasMany
+    {
+        return $this->hasMany(BusinessProcessRun::class);
+    }
+
+    public function workRequests(): HasMany
+    {
+        return $this->hasMany(WorkRequest::class);
+    }
+
+    public function routingDecisions(): HasMany
+    {
+        return $this->hasMany(RoutingDecision::class);
+    }
+
+    public function departmentQueues(): HasMany
+    {
+        return $this->hasMany(DepartmentQueue::class);
+    }
+
     public function activities(): HasMany
     {
         return $this->hasMany(Activity::class);

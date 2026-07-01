@@ -32,6 +32,26 @@ class Capability extends Model
         return $this->hasMany(SopCapability::class);
     }
 
+    public function businessProcessSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessStep::class, 'required_capability_id');
+    }
+
+    public function assignmentTemplates(): HasMany
+    {
+        return $this->hasMany(AssignmentTemplate::class, 'required_capability_id');
+    }
+
+    public function businessProcessRunSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessRunStep::class, 'required_capability_id');
+    }
+
+    public function workRequests(): HasMany
+    {
+        return $this->hasMany(WorkRequest::class, 'required_capability_id');
+    }
+
     public function employees(): BelongsToMany
     {
         return $this->belongsToMany(Employee::class, 'employee_capabilities')

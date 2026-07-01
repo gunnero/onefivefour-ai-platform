@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Database\Factories\AssignmentFactory;
+use Database\Factories\BusinessProcessRunStepFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Assignment extends Model
+class BusinessProcessRunStep extends Model
 {
-    /** @use HasFactory<AssignmentFactory> */
+    /** @use HasFactory<BusinessProcessRunStepFactory> */
     use HasFactory;
 
     protected $guarded = [];
@@ -19,17 +18,15 @@ class Assignment extends Model
     protected function casts(): array
     {
         return [
-            'briefing' => 'array',
+            'approval_required' => 'boolean',
             'input_payload' => 'array',
             'output_payload' => 'array',
-            'required_capability_keys' => 'array',
-            'confidence_score' => 'decimal:2',
-            'quality_score' => 'decimal:2',
-            'escalation_required' => 'boolean',
-            'review_required' => 'boolean',
-            'due_at' => 'datetime',
+            'ready_at' => 'datetime',
             'started_at' => 'datetime',
             'completed_at' => 'datetime',
+            'blocked_at' => 'datetime',
+            'failed_at' => 'datetime',
+            'cancelled_at' => 'datetime',
         ];
     }
 
@@ -38,9 +35,19 @@ class Assignment extends Model
         return $this->belongsTo(Organization::class);
     }
 
-    public function site(): BelongsTo
+    public function businessProcessRun(): BelongsTo
     {
-        return $this->belongsTo(Site::class);
+        return $this->belongsTo(BusinessProcessRun::class);
+    }
+
+    public function businessProcessStep(): BelongsTo
+    {
+        return $this->belongsTo(BusinessProcessStep::class);
+    }
+
+    public function assignment(): BelongsTo
+    {
+        return $this->belongsTo(Assignment::class);
     }
 
     public function department(): BelongsTo
@@ -58,24 +65,19 @@ class Assignment extends Model
         return $this->belongsTo(StandardOperatingProcedure::class);
     }
 
-    public function businessProcessRun(): BelongsTo
+    public function requiredCapability(): BelongsTo
     {
-        return $this->belongsTo(BusinessProcessRun::class);
+        return $this->belongsTo(Capability::class, 'required_capability_id');
     }
 
-    public function businessProcessRunStep(): BelongsTo
+    public function workRequests(): HasMany
     {
-        return $this->belongsTo(BusinessProcessRunStep::class);
+        return $this->hasMany(WorkRequest::class);
     }
 
-    public function workRequest(): BelongsTo
+    public function assignments(): HasMany
     {
-        return $this->belongsTo(WorkRequest::class);
-    }
-
-    public function routingDecision(): BelongsTo
-    {
-        return $this->belongsTo(RoutingDecision::class);
+        return $this->hasMany(Assignment::class);
     }
 
     public function processEvents(): HasMany
@@ -86,15 +88,5 @@ class Assignment extends Model
     public function processLogs(): HasMany
     {
         return $this->hasMany(ProcessLog::class);
-    }
-
-    public function activities(): HasMany
-    {
-        return $this->hasMany(Activity::class);
-    }
-
-    public function auditLogs(): MorphMany
-    {
-        return $this->morphMany(AuditLog::class, 'auditable');
     }
 }

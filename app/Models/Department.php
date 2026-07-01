@@ -52,6 +52,41 @@ class Department extends Model
         return $this->hasMany(Assignment::class);
     }
 
+    public function ownedBusinessProcessDefinitions(): HasMany
+    {
+        return $this->hasMany(BusinessProcessDefinition::class, 'owning_department_id');
+    }
+
+    public function businessProcessSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessStep::class);
+    }
+
+    public function assignmentTemplates(): HasMany
+    {
+        return $this->hasMany(AssignmentTemplate::class);
+    }
+
+    public function businessProcessRunSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessRunStep::class);
+    }
+
+    public function workRequests(): HasMany
+    {
+        return $this->hasMany(WorkRequest::class);
+    }
+
+    public function routingDecisions(): HasMany
+    {
+        return $this->hasMany(RoutingDecision::class);
+    }
+
+    public function departmentQueues(): HasMany
+    {
+        return $this->hasMany(DepartmentQueue::class);
+    }
+
     public function activities(): HasMany
     {
         return $this->hasMany(Activity::class);

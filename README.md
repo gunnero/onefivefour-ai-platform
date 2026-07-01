@@ -59,6 +59,7 @@ The platform should feel like managing an AI-powered media company, not running 
 - [Terminology](docs/015-terminology.md)
 - [Domain Language](docs/018-domain-language.md)
 - [Sprint 001 Review](docs/020-sprint-001-review.md)
+- [Sprint 002 Review](docs/022-sprint-002-review.md)
 
 ## Backend Foundation
 

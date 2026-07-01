@@ -7,6 +7,7 @@ use App\Models\Assignment;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Organization;
+use App\Services\OperationsCenter\OperationsCenterProjection;
 use BackedEnum;
 use Filament\Pages\Dashboard as BaseDashboard;
 use Filament\Support\Icons\Heroicon;
@@ -49,6 +50,7 @@ class Dashboard extends BaseDashboard
             'employees' => $organization ? $this->employeesFor($organization) : collect(),
             'assignments' => $organization ? $this->assignmentsFor($organization) : collect(),
             'activities' => $organization ? $this->activitiesFor($organization) : collect(),
+            'operationsCenter' => $organization ? app(OperationsCenterProjection::class)->forOrganization($organization) : null,
         ];
     }
 

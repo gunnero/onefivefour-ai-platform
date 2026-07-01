@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             StandardOperatingProcedureSeeder::class,
             SopPolicySeeder::class,
             SopCapabilitySeeder::class,
+            BusinessProcessSeeder::class,
             AssignmentSeeder::class,
             AuditLogSeeder::class,
             ActivitySeeder::class,

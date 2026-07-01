@@ -51,6 +51,56 @@ class Organization extends Model
         return $this->hasMany(Assignment::class);
     }
 
+    public function businessProcessDefinitions(): HasMany
+    {
+        return $this->hasMany(BusinessProcessDefinition::class);
+    }
+
+    public function businessProcessSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessStep::class);
+    }
+
+    public function assignmentTemplates(): HasMany
+    {
+        return $this->hasMany(AssignmentTemplate::class);
+    }
+
+    public function businessProcessRuns(): HasMany
+    {
+        return $this->hasMany(BusinessProcessRun::class);
+    }
+
+    public function businessProcessRunSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessRunStep::class);
+    }
+
+    public function processEvents(): HasMany
+    {
+        return $this->hasMany(ProcessEvent::class);
+    }
+
+    public function processLogs(): HasMany
+    {
+        return $this->hasMany(ProcessLog::class);
+    }
+
+    public function workRequests(): HasMany
+    {
+        return $this->hasMany(WorkRequest::class);
+    }
+
+    public function routingDecisions(): HasMany
+    {
+        return $this->hasMany(RoutingDecision::class);
+    }
+
+    public function departmentQueues(): HasMany
+    {
+        return $this->hasMany(DepartmentQueue::class);
+    }
+
     public function activities(): HasMany
     {
         return $this->hasMany(Activity::class);

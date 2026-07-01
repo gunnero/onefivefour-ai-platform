@@ -69,6 +69,26 @@ class Employee extends Model
         return $this->hasMany(Assignment::class);
     }
 
+    public function managedBusinessProcessDefinitions(): HasMany
+    {
+        return $this->hasMany(BusinessProcessDefinition::class, 'manager_employee_id');
+    }
+
+    public function businessProcessRunSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessRunStep::class);
+    }
+
+    public function selectedRoutingDecisions(): HasMany
+    {
+        return $this->hasMany(RoutingDecision::class, 'selected_employee_id');
+    }
+
+    public function lastSelectedDepartmentQueues(): HasMany
+    {
+        return $this->hasMany(DepartmentQueue::class, 'last_selected_employee_id');
+    }
+
     public function activities(): HasMany
     {
         return $this->hasMany(Activity::class);

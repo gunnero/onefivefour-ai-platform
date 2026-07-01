@@ -76,4 +76,24 @@ class StandardOperatingProcedure extends Model
     {
         return $this->hasMany(Assignment::class);
     }
+
+    public function businessProcessSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessStep::class);
+    }
+
+    public function assignmentTemplates(): HasMany
+    {
+        return $this->hasMany(AssignmentTemplate::class);
+    }
+
+    public function businessProcessRunSteps(): HasMany
+    {
+        return $this->hasMany(BusinessProcessRunStep::class);
+    }
+
+    public function workRequests(): HasMany
+    {
+        return $this->hasMany(WorkRequest::class);
+    }
 }

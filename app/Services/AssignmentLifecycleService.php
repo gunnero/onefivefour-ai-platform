@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Assignment;
+use App\Services\BusinessProcess\ProcessRunService;
 use DomainException;
 use Illuminate\Support\Facades\DB;
 
@@ -31,11 +32,15 @@ class AssignmentLifecycleService
         ]);
     }
 
-    public function block(Assignment $assignment, bool $escalationRequired = false): Assignment
+    public function block(Assignment $assignment, bool $escalationRequired = false, ?string $reason = null): Assignment
     {
-        return $this->transition($assignment, 'blocked', [
+        $blockedAssignment = $this->transition($assignment, 'blocked', [
             'escalation_required' => $escalationRequired,
         ]);
+
+        app(ProcessRunService::class)->blockFromAssignment($blockedAssignment, $reason);
+
+        return $blockedAssignment->refresh();
     }
 
     public function resume(Assignment $assignment): Assignment
@@ -57,15 +62,23 @@ class AssignmentLifecycleService
      */
     public function complete(Assignment $assignment, array $outputPayload): Assignment
     {
-        return $this->transition($assignment, 'completed', [
+        $completedAssignment = $this->transition($assignment, 'completed', [
             'completed_at' => now(),
             'output_payload' => $outputPayload,
         ]);
+
+        app(ProcessRunService::class)->advanceFromCompletedAssignment($completedAssignment);
+
+        return $completedAssignment->refresh();
     }
 
-    public function fail(Assignment $assignment): Assignment
+    public function fail(Assignment $assignment, ?string $reason = null): Assignment
     {
-        return $this->transition($assignment, 'failed');
+        $failedAssignment = $this->transition($assignment, 'failed');
+
+        app(ProcessRunService::class)->failFromAssignment($failedAssignment, $reason);
+
+        return $failedAssignment->refresh();
     }
 
     public function cancel(Assignment $assignment): Assignment
