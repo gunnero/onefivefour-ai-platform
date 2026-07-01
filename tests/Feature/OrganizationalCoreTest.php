@@ -184,6 +184,43 @@ class OrganizationalCoreTest extends TestCase
             ->assertOk();
     }
 
+    public function test_seeded_admin_user_can_see_the_hq_dashboard(): void
+    {
+        $this->seed();
+
+        $user = User::query()->where('email', 'admin@onefivefour.ai')->firstOrFail();
+
+        $this->actingAs($user)
+            ->get('/admin')
+            ->assertOk()
+            ->assertSeeText('HQ Dashboard')
+            ->assertSeeText('Organization Summary')
+            ->assertSeeText('OneFiveFour')
+            ->assertSeeText('onefivefour.ai')
+            ->assertSeeText('Europe/Skopje')
+            ->assertSeeText('Sites')
+            ->assertSeeText('Departments')
+            ->assertSeeText('Employees')
+            ->assertSeeText('Active Assignments')
+            ->assertSeeText('Active Policies')
+            ->assertSeeText('Active SOPs')
+            ->assertSeeText('Departments Overview')
+            ->assertSeeText('Editorial')
+            ->assertSeeText('Ensure editorial direction, review, and approval readiness.')
+            ->assertSeeText('Employees Overview')
+            ->assertSeeText('Elena Markova')
+            ->assertSeeText('Editor-in-Chief AI')
+            ->assertSeeText('Editing')
+            ->assertSeeText('Current Assignments')
+            ->assertSeeText('Review first Razbudise editorial package')
+            ->assertSeeText('Razbudise.mk')
+            ->assertSeeText('Editorial Review SOP')
+            ->assertSeeText('Review Required')
+            ->assertSeeText('Activity Feed')
+            ->assertSeeText('assignment_created')
+            ->assertSeeText('Assignment created for Elena Markova');
+    }
+
     public function test_seeded_admin_user_can_open_filament_resource_indexes(): void
     {
         $this->seed();
