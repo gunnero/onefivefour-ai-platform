@@ -32,9 +32,7 @@ class AssignmentObserver
     public function updated(Assignment $assignment): void
     {
         if ($assignment->wasChanged('status')) {
-            $changes = [
-                'status' => $assignment->status,
-            ];
+            $changes = $this->changedAuditState($assignment);
 
             $auditLog = $this->auditLogService->record(
                 auditable: $assignment,
