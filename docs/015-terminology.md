@@ -1,6 +1,8 @@
 # Terminology
 
-This document is the canonical terminology guide for README, docs, specs, UI copy, API naming, and database naming.
+This document is the short terminology guide for README, docs, specs, UI copy, API naming, and database naming.
+
+The canonical business dictionary is [Domain Language](018-domain-language.md).
 
 ## Canonical Terms
 

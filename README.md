@@ -57,3 +57,4 @@ The platform should feel like managing an AI-powered media company, not running 
 - [MVP Product Requirements](docs/010-prd.md)
 - [Architecture Decisions](docs/014-decisions.md)
 - [Terminology](docs/015-terminology.md)
+- [Domain Language](docs/018-domain-language.md)
