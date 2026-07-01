@@ -58,3 +58,31 @@ The platform should feel like managing an AI-powered media company, not running 
 - [Architecture Decisions](docs/014-decisions.md)
 - [Terminology](docs/015-terminology.md)
 - [Domain Language](docs/018-domain-language.md)
+
+## Backend Foundation
+
+Sprint 001 uses Laravel 13, PostgreSQL configuration, and Filament for the admin/HQ surface.
+
+Local setup:
+
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve
+```
+
+Run tests:
+
+```bash
+php artisan test
+```
+
+Filament opens at `/admin`.
+
+Seeded admin user:
+
+- Email: `admin@onefivefour.ai`
+- Password: `password`
